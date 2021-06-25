@@ -1,18 +1,25 @@
 import React from "react";
-import F from "./FeedbackOptions.module.css";
+import PropTypes from "prop-types";
+// import button from "./container/FeedbackOptions.module.css";
 
-const FeedbackOptions = ({ onGood, onNeutral, onBad }) => (
-  <div className={F.buttonContainer}>
-    <button className={F.button} type="button" onClick={onGood}>
-      Good
-    </button>
-    <button className={F.button} type="button" onClick={onNeutral}>
-      Neutral
-    </button>
-    <button className={F.button} type="button" onClick={onBad}>
-      Bad
-    </button>
-  </div>
+const FeedbackOptions = ({ options, onLeaveFeedback }) => (
+  <>
+    {options.map((option) => (
+      <button
+        key={option}
+        type="button"
+        name={option}
+        onClick={onLeaveFeedback}
+      >
+        {option}
+      </button>
+    ))}
+  </>
 );
+
+FeedbackOptions.propTypes = {
+  options: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  onLeaveFeedback: PropTypes.func.isRequired,
+};
 
 export default FeedbackOptions;
